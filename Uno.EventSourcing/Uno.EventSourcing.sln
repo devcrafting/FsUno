@@ -5,6 +5,11 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Uno.EventSourcing", "Uno.Ev
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Uno.EventSourcing.Tests", "..\Uno.EventSourcing.Tests\Uno.EventSourcing.Tests.fsproj", "{4D8EE633-B3F3-409A-A22A-C2C06E673845}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{968EAA86-34CB-4760-A69D-68171FD37ED9}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
