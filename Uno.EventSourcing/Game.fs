@@ -17,17 +17,20 @@ type Card =
 type PlayACard =
     { Card: Card }
 
-type GameStarted =
+type Event =
+    | GameStarted of GameStarted
+    | CardPlayed of CardPlayed
+and GameStarted =
     { GameId: int;
     NbPlayers: int }
-
-type CardPlayed =
+and CardPlayed =
     { Card: Card }
 
 type State =
-    { Started: bool }
+    { Started: bool;
+    LastCardPlayed: option<Card> }
 
-let InitialState = { Started = false }
+let InitialState = { Started = false; LastCardPlayed = None }
 
 let startAGame (command : StartAGame) state =
     if state.Started then
@@ -38,3 +41,9 @@ let startAGame (command : StartAGame) state =
 
 let playACard (command : PlayACard) state =
     [ { CardPlayed.Card = command.Card } ]
+
+let apply event state =
+    match event with
+        | GameStarted(_) -> { state with Started = true }
+        | CardPlayed(event) -> { state with LastCardPlayed = Some event.Card }
+        | _ -> failwith "Unknown event"
