@@ -40,12 +40,12 @@ let startAGame (command : StartAGame) state =
     [ { GameStarted.GameId = 1; NbPlayers = command.NbPlayers } ]
 
 let playACard (command : PlayACard) state =
-    if not state.LastCardPlayed.IsNone
-        && state.LastCardPlayed.Value.Color <> command.Card.Color
-        && state.LastCardPlayed.Value.Value <> command.Card.Value
-    then
-        failwith "Card cannot be played, it must be same color or same value"
-    [ { CardPlayed.Card = command.Card } ]
+    let raiseCardPlayed = [ { CardPlayed.Card = command.Card } ]
+    match state.LastCardPlayed, command.Card with
+        | None, _ -> raiseCardPlayed
+        | Some(cardOnTop), cardPlayed when cardOnTop.Color = cardPlayed.Color -> raiseCardPlayed
+        | Some(cardOnTop), cardPlayed when cardOnTop.Value = cardPlayed.Value -> raiseCardPlayed
+        | _ -> failwith "Card cannot be played, it must be same color or same value"
 
 let apply event state =
     match event with
