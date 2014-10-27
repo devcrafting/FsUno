@@ -14,3 +14,15 @@ let ``as the first player`` () =
         |> should equal [ { Card = RedOneCard } ]
     apply (CardPlayed({ Card = RedOneCard })) StartedGame
         |> should equal { StartedGame with LastCardPlayed = Some RedOneCard }
+
+[<TestFixture>]
+type ``given a card was already played``() =
+
+    let GreenTwoCard = { Color = Green; Value = 2 }
+    let RedTwoCard = { Color = Red; Value = 2 }
+    let RedOneOnTopOfPile = apply (CardPlayed({ Card = RedOneCard })) StartedGame 
+    
+    [<Test>]
+    member x.``with different color and value compared to the card on top of the pile`` () =
+        (fun () -> playACard { Card = GreenTwoCard } RedOneOnTopOfPile |> ignore)
+            |> should throw typeof<System.Exception>

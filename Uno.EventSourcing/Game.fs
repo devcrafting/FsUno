@@ -40,6 +40,8 @@ let startAGame (command : StartAGame) state =
     [ { GameStarted.GameId = 1; NbPlayers = command.NbPlayers } ]
 
 let playACard (command : PlayACard) state =
+    if not state.LastCardPlayed.IsNone then
+        failwith "Card cannot be played, it must be same color or same value"
     [ { CardPlayed.Card = command.Card } ]
 
 let apply event state =
