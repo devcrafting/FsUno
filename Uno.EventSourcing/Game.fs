@@ -1,10 +1,12 @@
 ﻿module Game
 
 type StartAGame =
-    { NbPlayers: int }
+    { GameId: int;
+    NbPlayers: int }
 
 type GameStarted =
-    { GameId: int }
+    { GameId: int;
+    NbPlayers: int }
 
 type State =
     { Started: bool }
@@ -14,4 +16,4 @@ let InitialState = { Started = false }
 let startAGame (command : StartAGame) state =
     if command.NbPlayers < 3 then
         failwith "There should be at least 3 players to be fun."
-    [ { GameId = 1} ]
+    [ { GameStarted.GameId = 1; NbPlayers = command.NbPlayers } ]
