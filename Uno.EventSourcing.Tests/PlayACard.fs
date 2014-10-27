@@ -26,3 +26,8 @@ type ``given a card was already played``() =
     member x.``with different color and value compared to the card on top of the pile`` () =
         (fun () -> playACard { Card = GreenTwoCard } RedOneOnTopOfPile |> ignore)
             |> should throw typeof<System.Exception>
+
+    [<Test>]
+    member x.``with same color as the card on top of the pile`` () =
+        playACard { Card = RedTwoCard } RedOneOnTopOfPile
+            |> should equal [ { Card = RedTwoCard } ]
