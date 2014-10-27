@@ -20,6 +20,7 @@ type ``given a card was already played``() =
 
     let GreenTwoCard = { Color = Green; Value = 2 }
     let RedTwoCard = { Color = Red; Value = 2 }
+    let BlueOneCard = { Color = Blue; Value = 1 }
     let RedOneOnTopOfPile = apply (CardPlayed({ Card = RedOneCard })) StartedGame 
     
     [<Test>]
@@ -31,3 +32,8 @@ type ``given a card was already played``() =
     member x.``with same color as the card on top of the pile`` () =
         playACard { Card = RedTwoCard } RedOneOnTopOfPile
             |> should equal [ { Card = RedTwoCard } ]
+            
+    [<Test>]
+    member x.``with same value as the card on top of the pile`` () =
+        playACard { Card = BlueOneCard } RedOneOnTopOfPile
+            |> should equal [ { Card = BlueOneCard } ]
