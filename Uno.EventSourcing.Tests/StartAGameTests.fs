@@ -1,4 +1,4 @@
-﻿module Uno.EventSourcing.Tests.``Start a game``
+﻿module ``Start a game``
 
 open NUnit.Framework
 open FsUnit

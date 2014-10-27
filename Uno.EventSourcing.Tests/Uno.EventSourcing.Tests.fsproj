@@ -49,9 +49,10 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StartAGameTests.fs" />
     <None Include="packages.config" />
     <None Include="app.config" />
+    <Compile Include="PlayACard.fs" />
+    <Compile Include="StartAGameTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Uno.EventSourcing\Uno.EventSourcing.fsproj">
